@@ -8,6 +8,9 @@ from config import config
 import os
 
 
+# TODO: There is a bug with how the accuracy is being computed
+
+
 def train(
     model,
     data_loader,

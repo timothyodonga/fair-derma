@@ -52,7 +52,7 @@ class ISICTestDataset(ISICDataset):
 
     def __getitem__(self, idx):
         img_path = self.root + "/" + self.img_list["image"][idx] + ".jpg"
-        print(img_path)
+        # print(img_path)
         img = Image.open(img_path).convert("RGB")
 
         if self.transforms is not None:

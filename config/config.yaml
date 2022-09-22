@@ -1,9 +1,10 @@
-mode: test
+mode: train
 
 data:
-  image_dir: data/ISIC2018_Task3_Training_Input/ISIC2018_Task3_Training_Input
-  train_data: data/ISIC2018_Task3_Training_GroundTruth/ISIC2018_Task3_Training_GroundTruth/ISIC2018_Task3_Training_GroundTruth.csv
-  test_data: data/sample_sub_v2.csv
+  train_image_dir: data/ISIC2018_Task3_Training_Input/ISIC2018_Task3_Training_Input
+  train_groundtruth: data/ISIC2018_Task3_Training_GroundTruth/ISIC2018_Task3_Training_GroundTruth/ISIC2018_Task3_Training_GroundTruth.csv
+  test_image_dir: data/ISIC2018_Task3_Validation_Input/ISIC2018_Task3_Validation_Input
+  test_groundtruth: data/ISIC2018_Task3_Validation_GroundTruth/ISIC2018_Task3_Validation_GroundTruth/ISIC2018_Task3_Validation_GroundTruth.csv
   output: output_0628.csv
 
 model:
@@ -12,6 +13,7 @@ model:
   saved_model: resnet18_06282022-19-59.pth
   model_type: resnet18
   pretrained: True
+  num_features: 7
 
 hyperparams:
   num_epochs: 10
