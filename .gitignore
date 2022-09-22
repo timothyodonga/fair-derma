@@ -1,0 +1,12 @@
+.vscode/
+data/*
+debug.*
+*/__pycache__
+*/*.pyc
+*.pyc
+*.pth
+debug_*
+test_test.ipynb
+test_train.ipynb
+output_*.csv
+test_*
