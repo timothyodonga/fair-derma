@@ -3,6 +3,9 @@ import torch
 import torch.utils.data
 import torch.nn.functional as F
 
+# TODO: There is a bug in the training loop.
+# TODO: Need to look at what Newton did in the code
+
 
 def test_classify(model, test_loader, device, criterion):
     model.eval()
@@ -23,11 +26,16 @@ def test_classify(model, test_loader, device, criterion):
         accuracy += torch.sum(torch.eq(pred_labels, labels)).item()
         total += len(labels)
         test_loss.extend([loss.item()] * feats.size()[0])
+        # mean_test_loss = np.mean(test_loss)
+        # test_accuracy = accuracy / total
+        # print(
+        #     f"Batch No.: {batch_num}\tBatch Accuracy: {test_accuracy}\tLoss: {mean_test_loss}"
+        # )
         del feats
         del labels
 
     model.train()
-    return np.mean(test_loss), accuracy / total
+    return np.mean(np.array(test_loss)), accuracy / total
 
 
 def test_model(model, test_loader, device):
