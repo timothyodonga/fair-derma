@@ -1,10 +1,10 @@
 mode: train
 
 data:
-  train_image_dir: data/ISIC2018_Task3_Training_Input/ISIC2018_Task3_Training_Input
-  train_groundtruth: data/ISIC2018_Task3_Training_GroundTruth/ISIC2018_Task3_Training_GroundTruth/ISIC2018_Task3_Training_GroundTruth.csv
-  test_image_dir: data/ISIC2018_Task3_Validation_Input/ISIC2018_Task3_Validation_Input
-  test_groundtruth: data/ISIC2018_Task3_Validation_GroundTruth/ISIC2018_Task3_Validation_GroundTruth/ISIC2018_Task3_Validation_GroundTruth.csv
+  train_image_dir: data/ISIC2018_Task3_Training_Input
+  train_groundtruth: data/ISIC2018_Task3_Training_GroundTruth/ISIC2018_Task3_Training_GroundTruth.csv
+  test_image_dir: data/ISIC2018_Task3_Validation_Input
+  test_groundtruth: data/ISIC2018_Task3_Validation_GroundTruth/ISIC2018_Task3_Validation_GroundTruth.csv
   output: output_0628.csv
 
 model:
@@ -12,15 +12,15 @@ model:
   saved_models_folder: saved_models
   saved_model: resnet18_06282022-19-59.pth
   model_type: resnet18
-  pretrained: True
+  pretrained: False
   num_features: 7
 
 hyperparams:
   num_epochs: 10
-  cross_validation_split: 0.3
-  batch_size: 64
+  cross_validation_split: 0.2
+  batch_size: 16
   learning_rate: 0.001
-  num_workers: 2
+  num_workers: 0
   lr_scheduler:
     factor: 0.1
     patience: 5

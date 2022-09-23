@@ -9,6 +9,7 @@ import os
 
 
 # TODO: There is a bug with how the accuracy is being computed
+# TODO: Refactor the code to the new pytorch coding style. A few things might have been deprecated.
 
 
 def train(
@@ -34,9 +35,7 @@ def train(
 
         for batch_num, (feats, labels) in enumerate(data_loader):
             feats, labels = feats.to(device), labels.to(device)
-
             optimizer.zero_grad()
-            # outputs = model(feats)[1]
             outputs = model(feats)
 
             loss = criterion(outputs, labels.long())
@@ -46,16 +45,8 @@ def train(
             loss_list.append(loss.item())
 
             if batch_num % 100 == 99:
-                # print(
-                #     "Epoch: {}\tBatch: {}\tAvg-Loss: {:.4f}".format(
-                #         epoch + 1, batch_num + 1, avg_loss / 100
-                #     )
-                # )
-
-                # print(f"Loss list: {loss_list}")
                 avg_loss = np.mean(np.array(loss_list))
                 print(f"Epoch: {epoch}\tBatch: {batch_num}\tAvg Loss: {avg_loss:.4}")
-                # print(f"Val Loss: {val_loss}\tVal Accuracy: {val_acc}")
                 avg_loss = 0.0
 
             torch.cuda.empty_cache()
@@ -64,23 +55,14 @@ def train(
             del loss
 
         if task == "Classification":
+            # Do we really need the train loss.
             val_loss, val_acc = test_classify(model, test_loader, device, criterion)
             train_loss, train_acc = test_classify(model, data_loader, device, criterion)
 
             end_time = time.time()
             print(f"Train loss: {train_loss:.4}\t Train Accuracy: {train_acc:.4}")
             print(f"Val loss: {val_loss:.4}\t Val Accuracy: {val_acc:.4}")
-
-            # print(
-            #     """Train Loss: {:.4f}\tTrain Accuracy: {:.4f}
-            #         Val Loss: {:.4f}\t  Val Accuracy: {:.4f}""".format(
-            #         train_loss, train_acc, val_loss, val_acc
-            #     )
-            # )
-
             print("Time:", end_time - start_time)
-
-            # Save the order with min loss
 
             if val_loss < min_loss:
                 now = datetime.now()
